@@ -7,6 +7,12 @@ function App() {
     email: ""
   });
 
+  const [user, setUser] = useState({
+    fName: "",
+    lName: "",
+    email: ""
+  });
+
   function handleChange(event) {
     const { name, value } = event.target;
 
@@ -33,34 +39,46 @@ function App() {
     });
   }
 
+  function handleClick(event) {
+    event.preventDefault();
+    setUser(userInfo);
+    setUserInfo({
+      fName: "",
+      lName: "",
+      email: ""
+    });
+  }
+
   return (
     <div className="container">
       <h1>
-        Hello {userInfo.fName} {userInfo.lName}
+        Hello {user.fName} {user.lName}
       </h1>
-      <p>{userInfo.email}</p>
-      <form>
+      <p>{user.email}</p>
+
+      <form onSubmit={handleClick}>
         <input
           name="fName"
           placeholder="First Name"
           onChange={handleChange}
           value={userInfo.fName}
-          autocomplete="off"
+          autoComplete="off"
         />
         <input
           name="lName"
           placeholder="Last Name"
           onChange={handleChange}
           value={userInfo.lName}
-          autocomplete="off"
+          autoComplete="off"
         />
         <input
           name="email"
           placeholder="Email"
           onChange={handleChange}
           value={userInfo.email}
+          autoComplete="off"
         />
-        <button>Submit</button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
